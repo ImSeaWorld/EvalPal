@@ -9,7 +9,7 @@ if (isset($_POST['eval'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP Eval Box</title>
+    <title>PHP EvalPal</title>
     <link rel="stylesheet" href="./codemirror/lib/codemirror.css">
     <link rel="stylesheet" href="./codemirror/theme/material-darker.css">
     <style>
@@ -89,7 +89,6 @@ if (isset($_POST['eval'])) {
             mode: 'php',
             theme: 'material-darker',
             lineNumbers: true,
-            //styleActiveLine: true,
             matchBrackets: true,
         });
 
