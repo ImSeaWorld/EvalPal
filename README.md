@@ -32,10 +32,10 @@ DocumentRoot "LOCATION"
 
 ## Example Usage
 
-##### Access files within project folder
+#### Access files within project folder (PHP tag nolonger needed)
 
 ![](https://i.imgur.com/E90Mklm.png)
 
-##### Test project for errors before production
+#### Test project for errors before production (PHP tag nolonger needed)
 
 ![](https://i.imgur.com/FufXyZd.png)
