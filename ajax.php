@@ -101,7 +101,7 @@ if (isset($_POST['cmd'])) {
                 mkdir('./saved/');
             }
 
-            if (!file_exists('./saved/' . $_POST['file']) || isset($_POST['overwrite'])) {
+            if (!file_exists('./saved/' . $_POST['file']) || (isset($_POST['overwrite']) && $_POST['overwrite'])) {
                 file_put_contents('./saved/' . $_POST['file'], $_POST['code']);
                 jdie(true);
             } else {

@@ -148,12 +148,12 @@
                     if (FileName) {
                         if (FileName.split('.').slice(-1)[0] != 'php')
                             FileName += '.php';
-
+                        console.log(modify);
                         $.post('ajax.php', {
                             cmd: 'save',
                             file: FileName,
                             code: editor.getValue(),
-                            overwrite: (modify != undefined)
+                            overwrite: (modify != undefined) || undefined
                         }).done((result) => {
                             if (result['error']) {
                                 if (ovrw = confirm(result['message'])) {
@@ -163,12 +163,14 @@
                                         code: editor.getValue(),
                                         overwrite: ovrw
                                     }).done((result) => {
-                                        alert(JSON.stringify(result));
+                                        if (result) {
+                                            instance.file = FileName;
+                                            alert('Saved ' + FileName);
+                                        }
                                     });
                                 }
                             } else {
                                 instance.file = FileName;
-
                                 alert('Saved ' + FileName);
                             }
                         });
