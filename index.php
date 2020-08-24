@@ -193,6 +193,7 @@
                 } else if (e.ctrlKey && e.keyCode == 66) { // ctrl + b
                     /* fresh start */
                     e.preventDefault();
+                    instance.file = undefined;
                     editor.setValue('');
                     editor.focus();
                     editor.setCursor(editor.lineCount(), 0);
