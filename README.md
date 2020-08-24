@@ -20,9 +20,9 @@ Evals are to be respected! **NEVER** run this on anything publically available! 
 # Replace "LOCATION" with location of your project folder
 DocumentRoot "LOCATION"
 <Directory "LOCATION">
-		Options Indexes FollowSymLinks Includes ExecCGI
-		AllowOverride All
-		Require all granted
+     Options Indexes FollowSymLinks Includes ExecCGI
+     AllowOverride All
+     Require all granted
 </Directory>
 ```
 
