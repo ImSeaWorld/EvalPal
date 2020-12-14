@@ -4,9 +4,9 @@ Evals are to be respected! **NEVER** run this on anything publically available! 
 
 ## Commands
 
-- Evaluate Instance `Ctrl`+`Enter`
-- Save Instance `Ctrl`+`S`
-- Last Instance `Ctrl`+`R`
+- Save `Ctrl`+`S`
+- Last `Ctrl`+`R`
+- Evaluate `Ctrl`+`Enter`
 - Fresh Start `Ctrl`+`B`
 
 ## Setup on Windows
@@ -29,6 +29,12 @@ DocumentRoot "LOCATION"
 - Restart Apache Service
 - Download EvalPal to your project folder
 - Go to location, example: `http://localhost/EvalPal/`
+
+## Future Features/Ideas
+
+- MySQL eval
+- Javascript eval
+- UI Rework to side by side panels
 
 ## Example Usage
 

