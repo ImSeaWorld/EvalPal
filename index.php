@@ -1,3 +1,9 @@
+<?php
+$evalExists = false;
+$evalCheck = '$evalExists = true;';
+eval($evalCheck);
+?>
+
 <html lang="en">
 
 <head>
@@ -17,7 +23,10 @@
             <label for="html">Display HTML</label>
             <input type="checkbox" name="html" id="html" checked>
         </div>
-        <?php echo 'PHP Version: ' . phpversion(); ?>
+        <?php 
+            echo 'PHP Version: ' . phpversion(); 
+            echo ' :: Server '. sprintf('<b style="color: %s;">%s</b>', $evalExists ? '#2eff2e' : '#ff5050', $evalExists ? 'supports' : 'does not support') .' eval()';
+        ?>
     </div>
     <div class="container-fluid p-0" style="height: calc(100vh - 50px);">
         <div class="row m-0" id="resizable-columns">
