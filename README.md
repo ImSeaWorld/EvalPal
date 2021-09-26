@@ -30,13 +30,32 @@ DocumentRoot "LOCATION"
 -   Download EvalPal to your project folder
 -   Go to location, example: `http://localhost/EvalPal/`
 
+## Setup on WSL2 Ubuntu 20.04
+
+-   Install Apache2
+    -   `sudo apt update`
+    -   `sudo apt install apache2`
+    -   `sudo ufw allow 'Apache Full'`(allows port 80 and 443)
+-   `sudo mkdir -p -v /home/USER/dev/EvalPal`
+-   `git clone https://github.com/ImSeaWorld/EvalPal /home/USER/dev/EvalPal`
+-   `sudo nano /etc/apache2/sites-available/000-default.conf` or `vim` if you prefer.
+    -   Go to(`ctrl`+`shift`+`_`) line 12 to `DocumentRoot /var/www/public`
+    -   Exit(`ctrl`+`x`) and save
+-   `ln -s /home/USER/dev/EvalPal /var/www/public`
+-   `sudo service apache2 restart`
+-   Now visit [http://localhost/EvalPal](http://localhost/EvalPal) and you should see EvalPal.
+
 ## Future Features/Ideas
 
 -   MySQL eval
--   Javascript eval
+-   JavaScript eval(dev tools exists though)
 
 ## Example Usage
 
 #### Test project for errors before production
 
 ![](https://i.imgur.com/xXzBszN.png)
+
+#### Easily do all the php things
+
+![](https://i.imgur.com/upDFakx.png)
