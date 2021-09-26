@@ -118,10 +118,10 @@ jQuery(function () {
     $(window).on('keydown', function (e) {
         // Text wrapping
         if (editor.getSelection().length > 0) {
-            e.preventDefault();
             const wrapArray = '[]{}()<>\'\'""``'.split('');
             const wrapIndex = wrapArray.findIndex((v) => v === e.key);
             if (wrapIndex >= 0) {
+                e.preventDefault();
                 editor.replaceSelection(
                     wrapArray[wrapIndex] +
                         editor.getSelection() +
