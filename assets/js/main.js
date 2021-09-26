@@ -1,4 +1,4 @@
-$(document).ready(function () {
+jQuery(function () {
     var instance = {
         file: '',
         result: '',
@@ -94,19 +94,17 @@ $(document).ready(function () {
     var Dragging = false;
 
     $('.splitter').on('mousedown mouseup', function (e) {
-        console.log(e);
-
         switch (e.type) {
             case 'mouseup':
                 if (Dragging) {
-                    $(document).unbind('mousemove');
+                    $(document).off('mousemove');
                     Dragging = false;
                 }
                 break;
             case 'mousedown':
                 e.preventDefault();
                 Dragging = true;
-                $(document).mousemove(function (e) {
+                $(document).on('mousemove', function (e) {
                     var percentage = (e.pageX / window.innerWidth) * 100;
                     var percentage = { a: percentage, b: 100 - percentage };
 
@@ -115,11 +113,23 @@ $(document).ready(function () {
                 });
                 break;
         }
-
-        //
     });
 
     $(window).on('keydown', function (e) {
+        // Text wrapping
+        if (editor.getSelection().length > 0) {
+            e.preventDefault();
+            const wrapArray = '[]{}()<>\'\'""``'.split('');
+            const wrapIndex = wrapArray.findIndex((v) => v === e.key);
+            if (wrapIndex >= 0) {
+                editor.replaceSelection(
+                    wrapArray[wrapIndex] +
+                        editor.getSelection() +
+                        wrapArray[wrapIndex + 1],
+                );
+            }
+        }
+
         if (e.ctrlKey && e.which == 13 && editor.getValue().length >= 1) {
             // ctrl + enter
             $.post('ajax.php', {
