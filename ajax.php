@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 function jdie($input)
 {
     header('Content-Type: application/json; charset=utf-8');
@@ -29,8 +33,6 @@ if (isset($_POST['cmd'])) {
                         $err->getLine(),
                         '<br><b>Error:</b> ',
                         $err->getMessage(),
-                        //'<br><b>Trace:</b> ',
-                        //$err->getTraceAsString(),
                         '<br><b>Error Code:</b> ',
                         $err->getCode(),
                         '</p>'
@@ -46,8 +48,6 @@ if (isset($_POST['cmd'])) {
                         $err->getLine(),
                         '<br><b>Error:</b> ',
                         $err->getMessage(),
-                        //'<br><b>Trace:</b> ',
-                        //$err->getTraceAsString(),
                         '<br><b>Error Code:</b> ',
                         $err->getCode(),
                         '</p>'
@@ -63,8 +63,6 @@ if (isset($_POST['cmd'])) {
                         $err->getLine(),
                         '<br><b>Error:</b> ',
                         $err->getMessage(),
-                        //'<br><b>Trace:</b> ',
-                        //$err->getTraceAsString(),
                         '<br><b>Error Code:</b> ',
                         $err->getCode(),
                         '</p>'
@@ -96,7 +94,7 @@ if (isset($_POST['cmd'])) {
             ]);
         case 'save':
             if (!file_exists('./saved/')) {
-                mkdir('./saved/');
+                mkdir('./saved/', 0755);
             }
 
             if (!file_exists('./saved/' . $_POST['file']) || (isset($_POST['overwrite']) && $_POST['overwrite'])) {
