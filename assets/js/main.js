@@ -145,7 +145,7 @@ jQuery(function () {
                     var tmp = result.replace('<br />', '');
                     $('.output-container').html(
                         editor.getValue().includes('print_r')
-                            ? `<pre>${tmp.substr(0, tmp.length - 1)}</pre>`
+                            ? `<pre>${tmp.substr(0, tmp.length)}</pre>`
                             : tmp,
                     );
                 } else {
