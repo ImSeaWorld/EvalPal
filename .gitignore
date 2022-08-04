@@ -1,0 +1,6 @@
+/saved/*
+.vscode
+/node_modules
+/saved
+color-output.txt
+dt.sql
