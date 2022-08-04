@@ -1,5 +1,5 @@
 {
-  "name": "eval",
+  "name": "evalpal",
   "version": "1.1.0",
   "description": "Evals are to be respected! **NEVER** run this on anything publically available! This is the keys to the castle for PHP. Anything PHP can do, eval will interperet it. Only warning...",
   "main": "index.js",
