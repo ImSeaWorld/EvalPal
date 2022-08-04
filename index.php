@@ -23,12 +23,11 @@ eval($evalCheck);
             <label for="html">Display HTML</label>
             <input type="checkbox" name="html" id="html" checked>
         </div>
-        <?php 
-            echo 'PHP Version: ' . phpversion(); 
-            echo ' :: Server '. sprintf('<b style="color: %s;">%s</b>', $evalExists ? '#2eff2e' : '#ff5050', $evalExists ? 'supports' : 'does not support') .' eval()';
+        <?php
+        echo implode('', ['PHP Version: ', phpversion(), ' :: Server ', sprintf('<b style="color: %s;">%s</b>', $evalExists ? '#2eff2e' : '#ff5050', $evalExists ? 'supports' : 'does not support'), ' eval()']);
         ?>
     </div>
-    <div class="container-fluid p-0" style="height: calc(100vh - 50px);">
+    <div class="container-fluid" style="height: calc(100vh - 50px);padding: 0;">
         <div class="row m-0" id="resizable-columns">
             <div class="col-6 p-0" id="input-container">
                 <textarea id="eval" cols="30" rows="10"></textarea>
@@ -36,6 +35,12 @@ eval($evalCheck);
             <div class="col-6 p-0" id="output-container">
                 <div class="splitter"></div>
                 <div class="output-container"></div>
+
+                <div class="loading visible">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
