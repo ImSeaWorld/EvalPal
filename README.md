@@ -9,6 +9,10 @@ Evals are to be respected! **NEVER** run this on anything publically available! 
 -   Evaluate `Ctrl`+`Enter`
 -   Fresh Start `Ctrl`+`B`
 
+## Text Wrapping
+
+-   Wrap highlighted text with brackets, braces, parethesis, backticks, single and double quotes, as well as greater\less than
+
 ## Setup on Windows
 
 -   Install [XAMPP](https://www.apachefriends.org/)
