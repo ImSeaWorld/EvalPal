@@ -2,6 +2,8 @@
 $evalExists = false;
 $evalCheck = '$evalExists = true;';
 eval($evalCheck);
+
+$package = json_decode(file_get_contents(__DIR__ . '/package.json'));
 ?>
 
 <html lang="en">
@@ -9,7 +11,8 @@ eval($evalCheck);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP EvalPal</title>
+    <title>PHP EvalPal v<?php echo $package->version; ?></title>
+    <meta name="description" content="<?php echo $package->description; ?>">
     <link rel="stylesheet" href="./assets/css/jquery-ui.min.css">
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/vendors/codemirror/lib/codemirror.css">
@@ -18,13 +21,32 @@ eval($evalCheck);
 </head>
 
 <body>
+    <?php
+    echo implode(PHP_EOL, [
+        "   <!-- ---------------------------------- -->",
+        "   <!-- EvalPal - Your pal; that does eval -->",
+        "   <!-- ---------------------------------- -->",
+        "   <!-- Version: $package->version -->",
+        "   <!-- Description: $package->description -->",
+        "   <!-- Original Project: https://github.com/ImSeaWorld/EvalPal -->",
+        "   <!-- License: $package->license -->",
+        "   <!--",
+        "       If you've found this on a public facing web-",
+        "       site/ip please be nice and notify the owner?",
+        "       Don't go accidently catching a felony; that",
+        "       would suuuuuuck.", "",
+        "       Thanks!",
+        "         - Robert(https://github.com/ImSeaWorld)",
+        "   -->"
+    ]);
+    ?>
     <div class="container-fluid p-0" style="height: 50px;">
         <div class="form-wrapper">
             <label for="html">Display HTML</label>
             <input type="checkbox" name="html" id="html" checked>
         </div>
         <?php
-        echo implode('', ['PHP Version: ', phpversion(), ' :: Server ', sprintf('<b style="color: %s;">%s</b>', $evalExists ? '#2eff2e' : '#ff5050', $evalExists ? 'supports' : 'does not support'), ' eval()']);
+        echo implode(' ', ['PHP Version:', phpversion(), ':: Server', sprintf('<b style="color: %s;">%s</b>', $evalExists ? '#2eff2e' : '#ff5050', $evalExists ? 'supports' : 'does not support'), 'eval()']);
         ?>
     </div>
     <div class="container-fluid" style="height: calc(100vh - 50px);padding: 0;">
