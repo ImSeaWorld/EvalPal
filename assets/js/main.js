@@ -3,6 +3,7 @@ jQuery(function () {
         file: '',
         result: '',
         base_location: '',
+        loading: true,
     };
 
     var editor = CodeMirror.fromTextArea($('#eval')[0], {
@@ -16,74 +17,36 @@ jQuery(function () {
         indentUnit: 4,
     });
 
+    function handleLoading(loading = true) {
+        instance.loading = loading;
+        $('.loading')[loading ? 'addClass' : 'removeClass']('visible');
+    }
+
     window.editor = editor;
 
     editor.refresh();
 
-    editor.on('change', () => {
-        setCodeHeight();
-    });
-
-    editor.on('keyup', function (cm, event) {
-        if (event.code === 'Backspace') {
-            setCodeHeight();
-        }
+    $.ajaxSetup({
+        beforeSend: () => handleLoading(true),
+        complete: () => handleLoading(false),
     });
 
     // get last modified file
     $.post('ajax.php', {
         cmd: 'getFile',
     }).done((result) => {
-        if (result) {
-            editor.setValue(result);
-        } else {
-            editor.setValue('');
-        }
-
-        setCodeHeight();
+        editor.setValue(result ? result : '');
     });
 
     editor.focus();
     editor.setCursor(editor.lineCount(), 0);
-
-    var codeHeight = () => {
-        let result = 0;
-        var children = $('.CodeMirror-code').find('> div');
-
-        for (var i = 0; i < children.length; i++) {
-            result += $(children[i]).height();
-        }
-
-        return children.length > 1 ? result : 0;
-    };
-
-    var setCodeHeight = () => {
-        var height = ((codeHeight) => {
-            if (codeHeight == 0) return 0;
-
-            return (
-                codeHeight +
-                ($('#resizable-columns').height() -
-                    $($('.CodeMirror-code > div')[0]).height() * 2)
-            );
-        })(codeHeight());
-        // add buffer space
-        $('.CodeMirror-code').height(height);
-        // make sure we're the same for the scrollbar
-        $($('.CodeMirror-vscrollbar > div')[0]).height(height);
-    };
-
-    $(window).on('resize', function () {
-        // add some extra space on the bottom
-        setCodeHeight();
-    });
 
     $('#html').on('click', function (e) {
         if ($(this).prop('checked')) {
             var tmp = instance.result.replace('<br />', '');
             $('.output-container').html(
                 editor.getValue().includes('print_r')
-                    ? `<pre>${tmp.substr(0, tmp.length - 2)}</pre>`
+                    ? `<pre>${tmp.substring(0, tmp.length - 2)}</pre>`
                     : tmp,
             );
         } else {
@@ -104,13 +67,20 @@ jQuery(function () {
             case 'mousedown':
                 e.preventDefault();
                 Dragging = true;
-                $(document).on('mousemove', function (e) {
-                    var percentage = (e.pageX / window.innerWidth) * 100;
-                    var percentage = { a: percentage, b: 100 - percentage };
+                $(document)
+                    .on('mousemove', function (e) {
+                        if (!Dragging) return;
 
-                    $('#input-container').css('width', `${percentage.a}%`);
-                    $('#output-container').css('width', `${percentage.b}%`);
-                });
+                        var percentage = (e.pageX / window.innerWidth) * 100;
+                        var percentage = { a: percentage, b: 100 - percentage };
+
+                        $('#input-container').css('width', `${percentage.a}%`);
+                        $('#output-container').css('width', `${percentage.b}%`);
+                    })
+                    .on('mouseup', function (e) {
+                        $(document).off('mousemove');
+                        Dragging = false;
+                    });
                 break;
         }
     });
@@ -132,6 +102,9 @@ jQuery(function () {
 
         if (e.ctrlKey && e.which == 13 && editor.getValue().length >= 1) {
             // ctrl + enter
+
+            if (instance.loading) return;
+
             $.post('ajax.php', {
                 cmd: 'eval',
                 eval: editor
@@ -157,6 +130,8 @@ jQuery(function () {
         } else if (e.ctrlKey && e.keyCode == 83) {
             // ctrl + s
             /* save */
+            if (instance.loading) return;
+
             e.preventDefault();
 
             var modify = instance.file || undefined;
@@ -197,6 +172,8 @@ jQuery(function () {
         } else if (e.ctrlKey && e.keyCode == 82) {
             // ctrl + r
             /* last instance */
+            if (instance.loading) return;
+
             e.preventDefault();
             $.post('ajax.php', {
                 cmd: 'getFile',
