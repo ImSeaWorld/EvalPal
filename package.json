@@ -1,0 +1,25 @@
+{
+  "name": "eval",
+  "version": "1.1.0",
+  "description": "Evals are to be respected! **NEVER** run this on anything publically available! This is the keys to the castle for PHP. Anything PHP can do, eval will interperet it. Only warning...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile-sass": "node ./node_modules/sass/sass.js --color --no-source-map inc/scss/style/style.scss:assets/css/style.css",
+    "compile-sass-compressed": "node ./node_modules/sass/sass.js --color --style=\"compressed\" --no-source-map inc/scss/style/style.scss:assets/css/style.min.css",
+    "sassy": "npm run compile-sass && npm run compile-sass-compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ImSeaWorld/EvalPal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ImSeaWorld/EvalPal/issues"
+  },
+  "homepage": "https://github.com/ImSeaWorld/EvalPal#readme",
+  "dependencies": {
+    "sass": "^1.30.0"
+  }
+}
