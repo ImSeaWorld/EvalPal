@@ -37,7 +37,11 @@ DocumentRoot "LOCATION"
     -   `sudo apt install apache2`
     -   `sudo ufw allow 'Apache Full'`(allows port 80 and 443)
 -   `sudo mkdir -p -v /home/USER/dev/EvalPal`
+-   `cd /home/USER/dev/EvalPal`
 -   `git clone https://github.com/ImSeaWorld/EvalPal /home/USER/dev/EvalPal`
+-   Make `saved` folder to save scripts
+    -   `sudo mkdir -p -v /home/USER/dev/EvalPal/saved/`
+    -   `sudo chown www-data -R /home/USER/dev/EvalPal/saved/`
 -   `sudo nano /etc/apache2/sites-available/000-default.conf` or `vim` if you prefer.
     -   Go to(`ctrl`+`shift`+`_`) line 12 to `DocumentRoot /var/www/public`
     -   Exit(`ctrl`+`x`) and save
