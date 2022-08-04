@@ -2,6 +2,12 @@
 
 Evals are to be respected! **NEVER** run this on anything publically available! This is the keys to the castle for PHP. Anything PHP can do, eval will interperet it. Only warning...
 
+#### Prerequisites
+-   Node.js v16+
+-   NPM v8+
+-   PHP v7+
+-   Apache/NGINX/Web Server
+
 ## Commands
 
 -   Save `Ctrl`+`S`
@@ -52,6 +58,18 @@ DocumentRoot "LOCATION"
 -   `ln -s /home/USER/dev/EvalPal /var/www/public`
 -   `sudo service apache2 restart`
 -   Now visit [http://localhost/EvalPal](http://localhost/EvalPal) and you should see EvalPal.
+
+## Development
+
+-   `cd /home/USER/dev/EvalPal`
+-   `npm install`
+    -   If you see "vulnerabilities", just note, it's very broad about what a vulnerability is.
+    -   Still concerned? Run `npm audit -production` or `npm audit --omit=dev` and follow the instructions.
+-   Main style location `./inc/scss/style/style.scss`
+    -   Building the style(regular and compressed): `npm run sassy`
+    -   Building regular: `npm run compile-sass`
+    -   Building compressed: `npm run compile-sass-compressed`
+-   Main javascript file location `./assets/js/main.js`
 
 ## Future Features/Ideas
 
